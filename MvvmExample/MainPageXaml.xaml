@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MvvmExample;MvvmExample"
+    x:Class="MvvmExample.MainPageXaml"
+    Title="Main Page"
+    BackgroundColor="{Binding BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BooleanToTConverter x:Key="OutOfRangeToLabelColorConverter" x:TypeArguments="Color" TrueValue="White" FalseValue="Green" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Slider Minimum="-5" Maximum="15" Value="{Binding Value, Mode=TwoWay}" />
+        <Label XAlign="Center" Text="{Binding Value}" TextColor="{Binding IsOutOfRange, Converter={StaticResource OutOfRangeToLabelColorConverter}}" />
+        <Button Text="Reset" Command="{Binding ResetCommand}" />
+        <Button Text="List" Clicked="OnListButtonClicked" />
+    </StackLayout>
+<!--    <StackLayout>
+        <local:SliderLabelView Minimum="-5" Maximum="15" Value="{Binding Value}" LabelColor="{Binding IsOutOfRange, Converter={StaticResource OutOfRangeToLabelColorConverter}}" />
+        <Button Text="Reset" Command="{Binding ResetCommand}" />
+    </StackLayout>-->
+</ContentPage>
